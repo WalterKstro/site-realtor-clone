@@ -1,6 +1,10 @@
+import Container from "../components/layout/Container"
+
 function HomePage() {
     return (
-        <div className="text-6xl">Home Page</div>
+        <Container>
+            <div className="text-6xl">Home Page</div>
+        </Container>
     )
 }
 
