@@ -1,12 +1,10 @@
-import { gsap } from "gsap";
 import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import useToogleMenu from "./hooks/useToogleMenu";
 
 function Logo() {
     const navigate = useNavigate()
-    function closeMenu() {
-        gsap.to('#menu', { left: '-100%', duration: .8 })
-    }
+    const { closeMenu } = useToogleMenu()
     return (
         <div className="p-4 flex justify-between lg:px-0">
             <img

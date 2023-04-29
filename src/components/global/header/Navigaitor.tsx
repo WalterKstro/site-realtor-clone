@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom"
+import useToogleMenu from "./hooks/useToogleMenu"
 
 function Navigaitor() {
+    const { closeMenu } = useToogleMenu()
     return (
         <nav className="flex flex-col divide-y-2 lg:flex-row lg:gap-4">
-            <NavLink className="px-4 h-12 flex items-center lg:px-0 lg:h-full" to="buy">Buy</NavLink>
+            <NavLink className="px-4 h-12 flex items-center lg:px-0 lg:h-full" to="buy" onClick={closeMenu}>Buy</NavLink>
             <a className="px-4 h-12 flex items-center lg:px-0 lg:h-full" href="#">Sell</a>
             <a className="px-4 h-12 flex items-center lg:px-0 lg:h-full" href="#">Rent</a>
             <a className="px-4 h-12 flex items-center lg:px-0 lg:h-full" href="#">Mortgage</a>

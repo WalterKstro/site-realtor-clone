@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .active{
-    @apply border-b-2 border-red-600 font-semibold;
+    @apply lg:border-b-2 lg:border-red-600 font-semibold;
 }
