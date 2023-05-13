@@ -10,7 +10,7 @@ function ButtonsAccount() {
                 to="/sign-in"
                 onClick={closeMenu}>Sign in</NavLink>
             <Link
-                className="hover:bg-red-700 py-1 bg-red-600 text-white rounded-full text-center lg:px-4 lg:py-2"
+                className="hover:bg-red-700 px-3 py-1.5 bg-red-600 text-white rounded-full text-center lg:px-4 lg:py-2"
                 to="/sign-up"
                 onClick={closeMenu}>Sign up</Link>
         </div>

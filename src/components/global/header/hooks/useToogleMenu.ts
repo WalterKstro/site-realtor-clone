@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 
 const useToogleMenu = () => {
-    const duration = .8;
+    const duration = .4;
     function openMenu() {
         gsap.to('#menu', { left: '0', duration })
     }

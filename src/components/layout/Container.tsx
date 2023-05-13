@@ -1,9 +1,7 @@
 import { FC } from "react"
+import { IChildren} from "../../interface"
 
-interface IProps {
-    children: React.ReactNode
-}
-function Container({ children }: IProps) {
+const Container:FC<Partial<IChildren>> = ({ children }) => {
     return (
         <div className="container mx-auto p-4 lg:p-0">{children}</div>
     )
