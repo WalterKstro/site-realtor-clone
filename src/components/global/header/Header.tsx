@@ -22,7 +22,8 @@ function Header() {
                         src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg"
                         alt="logo" />
 
-                    <div className="fixed max-w-[320px] bg-white h-screen w-3/4 -left-full top-0 flex flex-col justify-between lg:w-auto lg:static lg:h-auto lg:flex-row lg:flex-grow lg:max-w-full" id="menu">
+                    <div className="z-50 fixed max-w-[320px] bg-white h-screen w-3/4 -left-full top-0 flex flex-col justify-between lg:w-auto lg:static lg:h-auto lg:flex-row lg:flex-grow lg:max-w-full lg:z-auto" 
+                         id="menu">
 
                         {/* logo + navigaitor */}
                         <div className="lg:flex lg:gap-8">
