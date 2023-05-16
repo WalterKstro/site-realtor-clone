@@ -1,5 +1,5 @@
-import { ChangeEvent, FormEvent, useState } from "react"
-import {BsFillEyeFill, BsFillEyeSlashFill, BsGoogle} from 'react-icons/bs'
+
+import {BsGoogle} from 'react-icons/bs'
 import Banner from "../components/global/banner/Banner"
 import Container from "../components/layout/Container"
 import banner from '../assets/signin.jpg'
@@ -10,6 +10,7 @@ import Options from "../components/signin/Options"
 import Line from "../components/global/form/Line"
 import { Link } from "react-router-dom"
 import useForm from "../hooks/form/useForm"
+import useVisibilityPassword from '../hooks/form/useVisibilityPassword'
 
 interface IAccount {
     email:string,
@@ -17,19 +18,7 @@ interface IAccount {
 }
 function SignInPage() {
     const {handlerChange,handlerSubmit} = useForm()
-    const [isShowingPassword, setChangeStatusPassword] = useState<boolean>(false)
-
-    function handlerChangeStatusPassword():void{
-        setChangeStatusPassword(!isShowingPassword)
-    }
-  
-    function handlerReturnTypeInput():string {
-      return isShowingPassword ? 'text' : 'password'
-    }
-
-    function handlerAddIcon() {
-        return isShowingPassword ? <BsFillEyeSlashFill/> : <BsFillEyeFill/>
-    }
+    const {handlerReturnTypeInput,handlerChangeStatusPassword,handlerAddIcon} = useVisibilityPassword()  
 
     return (
         <Container>
