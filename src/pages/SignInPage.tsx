@@ -18,7 +18,7 @@ interface IAccount {
 }
 function SignInPage() {
     const {handlerChange,handlerSubmit} = useForm()
-    const {handlerReturnTypeInput,handlerChangeStatusPassword,handlerAddIcon} = useVisibilityPassword()  
+    const {handlerReturnTypeInput,handlerChangeStatusPassword,handlerAddIcon} = useVisibilityPassword()
 
     return (
         <Container>

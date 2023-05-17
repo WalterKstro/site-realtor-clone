@@ -10,11 +10,11 @@ import Field from "../components/global/form/Field"
 import Options from "../components/signin/Options"
 import Button from "../components/global/form/Button"
 import Line from "../components/global/form/Line"
+import useForm from "../hooks/form/useForm"
 
 function ForgotPasswordPage() {
 
-    function handlerSubmit():void{}
-    function handlerChange(evt:ChangeEvent):void {}
+    const {handlerChange,handlerSubmit} = useForm()
     return (
         <Container>
             <main className="min-h-[calc(100vh-53px)] flex">
@@ -33,7 +33,7 @@ function ForgotPasswordPage() {
                             <p>Don't have an account? <span className="text-primary-red-hover font-semibold"><Link to='/sign-up'>Register</Link></span></p>
                             <p className="text-primary-red-hover font-semibold"><Link to='/sign-in'>Sign in instead</Link></p>
                         </Options>
-                        <Button>Send reset email</Button>
+                        <Button>Send reset password</Button>
                         <Line/>
                         <Button icon={<BsGoogle className="text-xl"/>}>Continue with Google</Button>
                     </Form>

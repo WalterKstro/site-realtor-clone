@@ -2,7 +2,8 @@ import { ChangeEvent, FormEvent, useState } from "react"
 
 interface IAccount {
     email:string,
-    password:string
+    password:string,
+    name?:string
 }
 
 const useForm = () => {
@@ -10,7 +11,8 @@ const useForm = () => {
 
     const [data, setState] = useState<IAccount>({
         password:'',
-        email:''
+        email:'',
+        name:''
     })
 
     function handlerSubmit(evt:FormEvent):void {

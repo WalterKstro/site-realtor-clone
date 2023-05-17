@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 const SignUpPage = () => {
     const {handlerChange,handlerSubmit} = useForm()
     const {handlerReturnTypeInput,handlerChangeStatusPassword,handlerAddIcon} = useVisibilityPassword()
+    
     return (
         <Container>
              <main className="min-h-[calc(100vh-53px)] flex">
@@ -46,7 +47,7 @@ const SignUpPage = () => {
                                 <p>Have an account? <span className="text-primary-red-hover font-semibold"><Link to='/sign-in'>Sign In</Link></span></p>
                                 <p className="text-primary-red-hover font-semibold"><Link to='/forgot-password'>Forgot your password?</Link></p>
                             </Options>
-                            <Button>Sign In</Button>
+                            <Button>Sign Up</Button>
                             <Line/>
                             <Button icon={<BsGoogle className="text-xl"/>}>Continue with Google</Button>
                         </Form>
