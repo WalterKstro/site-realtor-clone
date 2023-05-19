@@ -19,6 +19,7 @@ const Field:FC<IProps> = ({name,type,handlerChange,placeholder,handlerChangeStat
         <div className="relative">
           <input
                 type={type}
+                required
                 id={name}
                 name={name} 
                 placeholder={placeholder}
