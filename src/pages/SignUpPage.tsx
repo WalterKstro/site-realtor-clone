@@ -12,9 +12,8 @@ import useVisibilityPassword from "../hooks/form/useVisibilityPassword"
 import { Link } from "react-router-dom"
 
 const SignUpPage = () => {
-    const {handlerChange,handlerSubmit} = useForm()
+    const {handlerChange,handlerSubmit,error} = useForm()
     const {handlerReturnTypeInput,handlerChangeStatusPassword,handlerAddIcon} = useVisibilityPassword()
-    
     return (
         <Container>
              <main className="min-h-[calc(100vh-53px)] flex">

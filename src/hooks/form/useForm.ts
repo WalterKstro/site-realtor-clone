@@ -1,7 +1,9 @@
-import {User, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
+import {createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 import { ChangeEvent, FormEvent, useState } from "react"
 import {auth, db} from '../../firebase'
 import { FieldValue, doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 interface IAccount {
     email:string,
@@ -20,8 +22,8 @@ type FormDataString = {
 }
 
 const useForm = () => {
-
-
+    const [error, setError] = useState<null | string>(null)
+    const navigate = useNavigate()
     const [data, setState] = useState<IAccount>({
         password:'',
         email:'',
@@ -35,8 +37,9 @@ const useForm = () => {
         const {email,password,name} = fields as FormDataString
         
         try {
-            const userCredentials = await createUserWithEmailAndPassword(auth, email,password)
-            const currentUser = auth.currentUser as User
+            // create an account
+            const userCredentials = await createUserWithEmailAndPassword(auth,email,password)
+            const currentUser = userCredentials.user
 
             // update the profile
             updateProfile(currentUser, {
@@ -47,8 +50,13 @@ const useForm = () => {
             const timestamp:FieldValue = serverTimestamp()
             await setDoc(doc(db,'users',currentUser.uid),{email,name,timestamp})
             
-        } catch (error) {
-            console.log(error)
+            navigate('/')
+            
+        } catch (error:any) {
+            toast.error('Tú registro no se completo, revisa que los campos esten llenos', {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000
+              });
         }
     }
 
@@ -62,6 +70,7 @@ const useForm = () => {
 
     return {
         data,
+        error,
         handlerSubmit,
         handlerChange
     }
