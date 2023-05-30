@@ -22,7 +22,6 @@ type FormDataString = {
 }
 
 const useForm = () => {
-    const [error, setError] = useState<null | string>(null)
     const navigate = useNavigate()
     const [data, setState] = useState<IAccount>({
         password:'',
@@ -70,7 +69,6 @@ const useForm = () => {
 
     return {
         data,
-        error,
         handlerSubmit,
         handlerChange
     }
