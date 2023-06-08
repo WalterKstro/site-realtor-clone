@@ -9,15 +9,15 @@ import Field from "../components/global/form/Field"
 import Form from "../components/global/form/Form"
 import Line from "../components/global/form/Line"
 import Options from "../components/signin/Options"
-import useForm from "../hooks/form/useForm"
 import useVisibilityPassword from '../hooks/form/useVisibilityPassword'
+import useSignIn from "../hooks/useSignIn"
 
 interface IAccount {
     email:string,
     password:string
 }
 function SignInPage() {
-    const {handlerChange,handlerSubmit} = useForm()
+    const {handlerChange,handlerSubmit} = useSignIn()
     const {handlerReturnTypeInput,handlerChangeStatusPassword,handlerAddIcon} = useVisibilityPassword()
 
     return (
