@@ -1,59 +1,19 @@
-import Banner from "../components/global/banner/Banner"
-import banner from '../assets/signup.jpg'
-import Container from "../components/layout/Container"
-import useForm from "../hooks/form/useForm"
-import Form from "../components/global/form/Form"
-import Field from "../components/global/form/Field"
-import Options from "../components/signin/Options"
-import Button from "../components/global/form/Button"
-import Line from "../components/global/form/Line"
 import { BsGoogle } from "react-icons/bs"
+import { Link } from "react-router-dom"
+import banner from '../assets/signup.jpg'
+import Banner from "../components/global/banner/Banner"
+import Button from "../components/global/form/Button"
+import Container from "../components/layout/Container"
+import Field from "../components/global/form/Field"
+import Form from "../components/global/form/Form"
+import Line from "../components/global/form/Line"
+import Options from "../components/signin/Options"
 import useVisibilityPassword from "../hooks/form/useVisibilityPassword"
-import { Link, NavigateFunction, useNavigate } from "react-router-dom"
-import { GoogleAuthProvider, UserCredential, getAuth, signInWithPopup } from "firebase/auth"
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore"
-import { db } from "../firebase"
-import { toast } from "react-toastify"
+import useSignUp from "../hooks/useSignUp"
 
 const SignUpPage = () => {
-    const {handlerChange,handlerSubmit} = useForm()
+    const {handlerChange,handlerSubmit,handlerSignUpGoogle} = useSignUp()
     const {handlerReturnTypeInput,handlerChangeStatusPassword,handlerAddIcon} = useVisibilityPassword()
-    const navigate:NavigateFunction = useNavigate()
-    
-    async function handlerSignUpGoogle() {
-        const auth = getAuth()
-        const provider = new GoogleAuthProvider();
-        try {
-            // sing up with Google Account
-            const result:UserCredential = await signInWithPopup(auth,provider);
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const user = result.user
-            
-            // get reference of one document
-            const docReference = doc(db,'users', user.uid)
-            // get one snapshot of a document
-            const docSnap = await getDoc(docReference)
-
-            
-            // exist uid of user in database
-            if( !docSnap.exists() ) {
-                // save to database
-                await setDoc(doc(db,'users',user.uid),{
-                    email: user.email,
-                    name: user.displayName,
-                    timestamp: serverTimestamp()
-                })    
-            }
-
-            navigate('/')
-            
-        } catch (error) {
-            toast.error('Tú registro no se completo, intente después', {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 3000
-              });
-        }
-    }
     
     return (
         <Container>

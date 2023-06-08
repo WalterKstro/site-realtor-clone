@@ -1,9 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react"
-import { FieldValue, doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import { FieldValue, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import {auth, db} from '../../firebase'
 import {createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
+import { db, auth } from "../firebase"
+import { GoogleAuthProvider, UserCredential, getAuth, signInWithPopup } from "firebase/auth"
 
 interface IAccount {
     email:string,
@@ -21,7 +22,7 @@ type FormDataString = {
     [K in keyof FormDataValue]: string;
 }
 
-const useForm = () => {
+const useSignUp = () => {
     const navigate = useNavigate()
     const [data, setState] = useState<IAccount>({
         password:'',
@@ -52,7 +53,42 @@ const useForm = () => {
             navigate('/')
             
         } catch (error:any) {
-            toast.error('Tú registro no se completo, revisa que los campos esten llenos', {
+            toast.error(`Error en tú registro ${error.message}`, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000
+              });
+        }
+    }
+
+    async function handlerSignUpGoogle():Promise<void> {
+        const auth = getAuth()
+        const provider = new GoogleAuthProvider();
+        try {
+            // sing up with Google Account
+            const result:UserCredential = await signInWithPopup(auth,provider);
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const user = result.user
+            
+            // get reference of one document
+            const docReference = doc(db,'users', user.uid)
+            // get one snapshot of a document
+            const docSnap = await getDoc(docReference)
+
+            
+            // exist uid of user in database
+            if( !docSnap.exists() ) {
+                // save to database
+                await setDoc(doc(db,'users',user.uid),{
+                    email: user.email,
+                    name: user.displayName,
+                    timestamp: serverTimestamp()
+                })    
+            }
+
+            navigate('/')
+            
+        } catch (error) {
+            toast.error('Tú registro no se completo, intente después', {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000
               });
@@ -68,11 +104,9 @@ const useForm = () => {
     }
 
     return {
-        data,
         handlerSubmit,
-        handlerChange
+        handlerChange,
+        handlerSignUpGoogle
     }
 }
-
-
-export default useForm
+export default useSignUp

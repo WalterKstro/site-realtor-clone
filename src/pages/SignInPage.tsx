@@ -1,14 +1,14 @@
 
-import {BsGoogle} from 'react-icons/bs'
-import Banner from "../components/global/banner/Banner"
-import Container from "../components/layout/Container"
-import banner from '../assets/signin.jpg'
-import Form from "../components/global/form/Form"
-import Field from "../components/global/form/Field"
-import Button from "../components/global/form/Button"
-import Options from "../components/signin/Options"
-import Line from "../components/global/form/Line"
 import { Link } from "react-router-dom"
+import {BsGoogle} from 'react-icons/bs'
+import banner from '../assets/signin.jpg'
+import Banner from "../components/global/banner/Banner"
+import Button from "../components/global/form/Button"
+import Container from "../components/layout/Container"
+import Field from "../components/global/form/Field"
+import Form from "../components/global/form/Form"
+import Line from "../components/global/form/Line"
+import Options from "../components/signin/Options"
 import useForm from "../hooks/form/useForm"
 import useVisibilityPassword from '../hooks/form/useVisibilityPassword'
 
@@ -46,9 +46,13 @@ function SignInPage() {
                                 <p>Don't have an account? <span className="text-primary-red-hover font-semibold"><Link to='/sign-up'>Register</Link></span></p>
                                 <p className="text-primary-red-hover font-semibold"><Link to='/forgot-password'>Forgot your password?</Link></p>
                             </Options>
-                            <Button>Sign In</Button>
+                            <Button type="submit">Sign In</Button>
                             <Line/>
-                            <Button icon={<BsGoogle className="text-xl"/>}>Continue with Google</Button>
+                            <Button 
+                                type="button"
+                                icon={<BsGoogle className="text-xl"/>}>
+                                    Continue with Google
+                            </Button>
                         </Form>
                     </div>
                 </section>
